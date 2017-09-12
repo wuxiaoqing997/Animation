@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Airplane</title>
+    <style media="screen">
+    canvas {
+        border: 1px black solid;
+    }
+    </style>
+    <script src='game/utils.js'></script>
+    <script src='game/guagame.js'></script>
+    <script src='game/mainScene.js'></script>
+    <script src='game/img.js'></script>
+    <script src='game/particle.js'></script>
+    <script src='game/animation.js'></script>
+    <script src='game/label.js'></script>
+    <script src='scene/main/scene.js'></script>
+    <script src='scene/title/sceneTitle.js'></script>
+    <script src='scene/sceneEnd/sceneEnd.js'></script>
+</head>
+
+<body>
+    <canvas id="id-canvas" width="600" height="850"></canvas>
+    <hr>
+    <div>
+        <label>
+            <input class="auto-slider" type="range" value="" data-value="config.enemy_speed" max="25"> 敌人速度：
+            <span class="speed_label"></span>
+        </label>
+    </div>
+    <div>
+        <label>
+            <input class="auto-slider" type="range" value="" data-value="config.player_speed" max="30"> 玩家速度：
+            <span class="speed_label"></span>
+        </label>
+    </div>
+    <div>
+        <label>
+            <input class="auto-slider" type="range" value="" data-value="config.bullet_speed" max="20"> 子弹速度：
+            <span class="speed_label"></span>
+        </label>
+    </div>
+    <div>
+        <label>
+            <input class="auto-slider" type="range" value="" data-value="config.fire_cooldown" max="10"> 冷却时间：
+            <span class="speed_label"></span>
+        </label>
+    </div>
+    <script src="scene/main/main.js"></script>
+    <script>
+    var es = sel => document.querySelectorAll(sel)
+    var bindAll = function(sel, eventName, callback){
+        var l = es(sel)
+        for (var i = 0; i < l.length; i++) {
+            var input = l[i]
+            input.addEventListener(eventName, function(event) {
+                callback(event)
+            })
+        }
+    }
+    bindAll('.auto-slider', 'input', function(event) {
+        var target = event.target
+        var bindValue = target.dataset.value
+        var v = target.value
+        eval(bindValue + '=' + v)
+        var label = target.closest('label').querySelector('.speed_label')
+        label.innerText = v
+    })
+    </script>
+</body>
+
+</html>
